@@ -1,19 +1,26 @@
 from google.genai import Client
 import base64
+import datetime
 
-# Insert your API key
+
 client = Client(api_key="AIzaSyBQIP3QN4ZkCDVM84B0A6vDIfeqXP7fR_0")
 
-# Load image bytes
 with open("poem.jpg", "rb") as f:
     image_bytes = f.read()
 
-prompt = """
+prompt = f"""
 You are analyzing a photograph of a poem.
+
+TASKS:
 1. Read the poem from the image.
 2. Explain its meaning in clear, natural language.
 3. Identify the poem’s central theme.
 4. Describe any emotional tone or symbolism.
+5. Rate your confidence from 0–100%.
+
+RULE:
+If your confidence is below 60%, shorten your explanation and say:
+'Confidence is low — interpretation may be inaccurate.'
 """
 
 response = client.models.generate_content(
@@ -33,4 +40,11 @@ response = client.models.generate_content(
     ]
 )
 
+print("\n--- AI INTERPRETATION ---\n")
 print(response.text)
+
+print("\n--- SUCCESS TEST ---")
+print("Success if:")
+print("- The interpretation changes depending on the time of day.")
+print("- The AI includes a confidence rating.")
+print("- The rule triggers when confidence < 60%.")
