@@ -3,7 +3,7 @@ import base64
 import datetime
 
 
-client = Client(api_key="AIzaSyBQIP3QN4ZkCDVM84B0A6vDIfeqXP7fR_0")
+client = Client(api_key="AIzaSyAwyO4PDOCNd7xc5ou2vgMo9y2LqWB6WO8")
 
 with open("poem.jpg", "rb") as f:
     image_bytes = f.read()
